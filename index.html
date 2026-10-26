@@ -1,296 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Isaac Desmond — Full-Stack Developer</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Isaac Desmond | AI Automation & Full-Stack Developer</title>
+<meta name="description" content="Self-taught AI automation and full-stack developer building n8n workflows, Python bots, and mobile apps. Available for remote work worldwide.">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #0a0a0f; --bg2: #111118; --bg3: #1a1a24;
-    --border: rgba(255,255,255,0.08); --border-accent: rgba(99,102,241,0.5);
-    --text: #f0f0f5; --muted: #888896;
-    --accent: #818cf8; --accent2: #34d399; --accent3: #f472b6;
-    --mono: 'JetBrains Mono', monospace; --sans: 'Syne', sans-serif;
-  }
-  html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; overflow-x: hidden; }
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 2.5rem; border-bottom: 1px solid var(--border);
-    background: rgba(10,10,15,0.85); backdrop-filter: blur(12px);
-  }
-  .nav-logo { font-family: var(--mono); font-size: 14px; color: var(--accent); letter-spacing: 0.05em; }
-  .nav-links { display: flex; gap: 1.75rem; list-style: none; flex-wrap: wrap; }
-  .nav-links a { font-family: var(--mono); font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--accent); }
-  section { padding: 6rem 2.5rem; max-width: 1000px; margin: 0 auto; }
-  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 8rem; position: relative; }
-  .hero-tag { font-family: var(--mono); font-size: 12px; color: var(--accent2); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px; }
-  .hero-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent2); }
-  h1 { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-  .name-highlight { background: linear-gradient(90deg, var(--accent), var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero-sub { font-family: var(--mono); font-size: 15px; color: var(--muted); max-width: 560px; line-height: 1.8; margin-bottom: 2.5rem; }
-  .hero-sub span { color: var(--accent); }
-  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
-  .btn { font-family: var(--mono); font-size: 13px; padding: 0.75rem 1.5rem; border-radius: 6px; cursor: pointer; text-decoration: none; letter-spacing: 0.05em; transition: all 0.2s; display: inline-block; }
-  .btn-primary { background: var(--accent); color: #0a0a0f; border: 1px solid var(--accent); font-weight: 700; }
-  .btn-primary:hover { background: #a5b4fc; }
-  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
-  .grid-bg { position: fixed; inset: 0; z-index: -1; pointer-events: none; background-image: linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px); background-size: 48px 48px; }
-  .glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%); top: -100px; right: -150px; pointer-events: none; }
-  .section-label { font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
-  h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 3rem; color: var(--text); }
-  .divider { width: 40px; height: 2px; background: linear-gradient(90deg, var(--accent), transparent); margin-bottom: 0.75rem; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-  .about-text { font-family: var(--mono); font-size: 14px; color: var(--muted); line-height: 1.9; }
-  .about-text p + p { margin-top: 1rem; }
-  .about-text strong { color: var(--text); font-weight: 500; }
-  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .skill-tag { font-family: var(--mono); font-size: 12px; padding: 6px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: 4px; color: var(--accent2); display: flex; align-items: center; gap: 6px; }
-  .skill-tag::before { content: '▸'; font-size: 10px; color: var(--accent); }
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
-  .project-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; display: flex; flex-direction: column; }
-  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent3)); opacity: 0; transition: opacity 0.2s; }
-  .project-card:hover { border-color: var(--border-accent); transform: translateY(-3px); }
-  .project-card:hover::before { opacity: 1; }
-  .project-card.featured { border-color: rgba(99,102,241,0.3); }
-  .project-card.featured::before { opacity: 1; }
-  .live-badge { font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em; background: rgba(52,211,153,0.15); border: 1px solid rgba(52,211,153,0.3); color: var(--accent2); padding: 2px 8px; border-radius: 20px; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 0.75rem; }
-  .live-badge::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--accent2); animation: pulse 1.5s infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-  .project-num { font-family: var(--mono); font-size: 11px; color: var(--accent); margin-bottom: 0.5rem; opacity: 0.7; }
-  .project-title { font-size: 17px; font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
-  .project-desc { font-family: var(--mono); font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; flex: 1; }
-  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
-  .tag { font-family: var(--mono); font-size: 10px; padding: 3px 8px; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); border-radius: 3px; color: var(--accent); letter-spacing: 0.05em; }
-  .project-link { font-family: var(--mono); font-size: 11px; color: var(--accent2); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: gap 0.2s; }
-  .project-link:hover { gap: 8px; }
-  .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
-  .service-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.75rem; transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; }
-  .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent2), var(--accent)); opacity: 0; transition: opacity 0.2s; }
-  .service-card:hover { border-color: rgba(52,211,153,0.4); transform: translateY(-3px); }
-  .service-card:hover::before { opacity: 1; }
-  .service-icon { font-size: 28px; margin-bottom: 1rem; display: block; }
-  .service-title { font-size: 16px; font-weight: 700; margin-bottom: 0.6rem; color: var(--text); }
-  .service-desc { font-family: var(--mono); font-size: 12px; color: var(--muted); line-height: 1.75; margin-bottom: 1.25rem; }
-  .service-features { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-  .service-features li { font-family: var(--mono); font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
-  .service-features li::before { content: '✓'; color: var(--accent2); font-size: 10px; font-weight: 700; }
-  .service-cta { margin-top: 1.25rem; }
-  .service-btn { font-family: var(--mono); font-size: 11px; padding: 6px 14px; border-radius: 5px; border: 1px solid rgba(52,211,153,0.3); color: var(--accent2); text-decoration: none; transition: all 0.2s; display: inline-block; }
-  .service-btn:hover { background: rgba(52,211,153,0.1); border-color: var(--accent2); }
-  .learning-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
-  .learning-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; display: flex; align-items: flex-start; gap: 12px; }
-  .learning-icon { font-size: 20px; margin-top: 2px; }
-  .learning-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .learning-sub { font-family: var(--mono); font-size: 11px; color: var(--muted); line-height: 1.6; }
-  .contact-box { border: 1px solid var(--border); border-radius: 12px; padding: 3rem; text-align: center; background: var(--bg2); position: relative; overflow: hidden; }
-  .contact-box::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, rgba(99,102,241,0.08) 0%, transparent 70%); pointer-events: none; }
-  .contact-title { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; }
-  .contact-sub { font-family: var(--mono); font-size: 13px; color: var(--muted); margin-bottom: 2rem; line-height: 1.7; }
-  .social-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
-  .social-link { font-family: var(--mono); font-size: 12px; color: var(--muted); text-decoration: none; padding: 6px 16px; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
-  .social-link:hover { color: var(--accent); border-color: var(--border-accent); }
-  .social-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); }
-  footer { border-top: 1px solid var(--border); padding: 2rem 2.5rem; text-align: center; font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
-  @media (max-width: 640px) {
-    section { padding: 4rem 1.25rem; } nav { padding: 1rem 1.25rem; } .nav-links { gap: 1rem; }
-    .about-grid { grid-template-columns: 1fr; } .contact-box { padding: 2rem 1.25rem; }
-  }
+:root{--bg:#0d1117;--card:#161b22;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--border:#30363d}
+@media (prefers-color-scheme:light){:root{--bg:#f6f8fa;--card:#fff;--text:#1f2328;--muted:#59636e;--accent:#0969da;--border:#d1d9e0}}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+nav{border-bottom:1px solid var(--border);padding:16px 0}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+nav strong{font-size:1.1rem}
+nav div a{margin-left:18px;color:var(--muted);font-size:.95rem}
+.hero{padding:72px 0 48px}
+.hero h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.15;margin-bottom:16px}
+.hero h1 span{color:var(--accent)}
+.hero p{color:var(--muted);font-size:1.1rem;max-width:620px;margin-bottom:28px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:11px 22px;border-radius:8px;font-weight:600;border:1px solid var(--accent)}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.primary:hover{text-decoration:none;opacity:.9}
+.stats{display:flex;gap:32px;flex-wrap:wrap;margin-top:40px}
+.stats b{display:block;font-size:1.6rem}
+.stats small{color:var(--muted)}
+section{padding:48px 0}
+h2{font-size:1.6rem;margin-bottom:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px}
+.card h3{margin-bottom:8px;font-size:1.1rem}
+.card p{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tags span{font-size:.78rem;padding:3px 10px;border-radius:99px;border:1px solid var(--border);color:var(--muted)}
+.badge{display:inline-block;font-size:.75rem;color:var(--accent);margin-bottom:8px}
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.skills h3{font-size:1rem;margin-bottom:6px}
+.skills p{color:var(--muted);font-size:.93rem}
+.contact{text-align:center}
+.contact p{color:var(--muted);max-width:520px;margin:0 auto 24px}
+.contact .btns{justify-content:center}
+footer{border-top:1px solid var(--border);padding:24px 0;text-align:center;color:var(--muted);font-size:.85rem}
 </style>
 </head>
 <body>
-<div class="grid-bg"></div>
-<nav>
-  <div class="nav-logo">&lt;isaac.dev /&gt;</div>
-  <ul class="nav-links">
-    <li><a href="#about">about</a></li>
-    <li><a href="#projects">projects</a></li>
-    <li><a href="#services">services</a></li>
-    <li><a href="#learning">currently</a></li>
-    <li><a href="#contact">contact</a></li>
-  </ul>
-</nav>
 
-<section id="hero">
-  <div class="glow"></div>
-  <div class="hero-tag">open to opportunities</div>
-  <h1>Hi, I'm<br><span class="name-highlight">Isaac Desmond</span></h1>
-  <p class="hero-sub">
-    A <span>full-stack developer</span> who builds AI-powered tools,
-    real-world web solutions, and custom gaming setups.
-    Self-taught, self-driven, always shipping.
-  </p>
-  <div class="hero-cta">
-    <a href="#projects" class="btn btn-primary">View my work</a>
-    <a href="#contact" class="btn btn-ghost">Get in touch</a>
-  </div>
-</section>
+<nav><div class="wrap">
+<strong>Isaac Desmond</strong>
+<div><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div>
+</div></nav>
 
-<section id="about">
-  <div class="divider"></div>
-  <div class="section-label">01 — about me</div>
-  <h2>Who I am</h2>
-  <div class="about-grid">
-    <div class="about-text">
-      <p>I'm <strong>Isaac Desmond</strong>, a self-taught full-stack developer and tech enthusiast based in Nigeria. I build across the web — from AI automation bots to live client-facing business sites.</p>
-      <p>Beyond software, I also spec, build, and repair PCs and gaming setups. Tech is not just my career — it's what I do.</p>
-      <p>Currently <strong>open to freelance work and entry-level roles</strong> — let's build something great.</p>
-    </div>
-    <div>
-      <div style="font-family: var(--mono); font-size: 11px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1rem;">Tools I use</div>
-      <div class="skills-grid">
-        <div class="skill-tag">n8n</div>
-        <div class="skill-tag">Lovable</div>
-        <div class="skill-tag">Telegram API</div>
-        <div class="skill-tag">Paystack</div>
-        <div class="skill-tag">JavaScript</div>
-        <div class="skill-tag">AI / LLMs</div>
-        <div class="skill-tag">Vercel</div>
-        <div class="skill-tag">Git</div>
-      </div>
-    </div>
-  </div>
-</section>
+<header class="hero"><div class="wrap">
+<h1>I build <span>AI automation</span> and full-stack apps that save businesses time.</h1>
+<p>Self-taught developer based in Nigeria, available for remote work worldwide. I turn manual, repetitive work into workflows that run on their own, using n8n, Python, and modern JavaScript.</p>
+<div class="btns">
+<a class="btn primary" href="#contact">Hire me</a>
+<a class="btn" href="https://github.com/CodexWayde">View GitHub</a>
+</div>
+<div class="stats">
+<div><b>50+</b><small>projects delivered</small></div>
+<div><b>1,000+</b><small>users on my AI news bot</small></div>
+<div><b>3-5 days</b><small>typical website turnaround</small></div>
+</div>
+</div></header>
 
-<section id="projects">
-  <div class="divider"></div>
-  <div class="section-label">02 — selected work</div>
-  <h2>Things I've built</h2>
-  <div class="projects-grid">
-    <div class="project-card featured">
-      <div class="live-badge">live project</div>
-      <div class="project-num">// 001</div>
-      <div class="project-title">CodexWeb Services</div>
-      <p class="project-desc">My own web development business site — built, hosted, and live. Showcases services and lets clients pay directly via Paystack integration.</p>
-      <div class="project-tags">
-        <span class="tag">Vercel</span><span class="tag">Paystack</span><span class="tag">Web Design</span><span class="tag">Live</span>
-      </div>
-      <a href="https://codexwebservices.vercel.app/" target="_blank" class="project-link">Visit site →</a>
-    </div>
-    <div class="project-card">
-      <div class="project-num">// 002</div>
-      <div class="project-title">AI News Telegram Bot</div>
-      <p class="project-desc">An AI-powered Telegram bot that automatically fetches and delivers global and tech news to subscribers every day — fully automated, zero manual input.</p>
-      <div class="project-tags">
-        <span class="tag">n8n</span><span class="tag">Telegram Bot API</span><span class="tag">AI / LLM</span><span class="tag">Automation</span>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-num">// 003</div>
-      <div class="project-title">Salon Business Website</div>
-      <p class="project-desc">A professional business website designed and built for a hair salon client. Showcases services, pricing, and contact info with a clean, modern look.</p>
-      <div class="project-tags">
-        <span class="tag">Lovable</span><span class="tag">Web Design</span><span class="tag">Client Work</span>
-      </div>
-    </div>
-    <div class="project-card">
-      <div class="project-num">// 004</div>
-      <div class="project-title">Personal Portfolio</div>
-      <p class="project-desc">A dark, minimal developer portfolio to showcase projects, services, and skills — built to make a strong first impression with recruiters and clients.</p>
-      <div class="project-tags">
-        <span class="tag">HTML / CSS</span><span class="tag">JavaScript</span><span class="tag">UI Design</span>
-      </div>
-    </div>
-  </div>
-</section>
+<section id="projects"><div class="wrap">
+<h2>Featured projects</h2>
+<div class="grid">
 
-<section id="services">
-  <div class="divider"></div>
-  <div class="section-label">03 — what I offer</div>
-  <h2>Services</h2>
-  <div class="services-grid">
-    <div class="service-card">
-      <span class="service-icon">🖥️</span>
-      <div class="service-title">Custom Gaming PC Builds</div>
-      <p class="service-desc">I spec and assemble custom gaming PCs tailored to your budget and performance goals — from entry-level to high-end rigs.</p>
-      <ul class="service-features">
-        <li>Budget & performance planning</li>
-        <li>Component sourcing advice</li>
-        <li>Full assembly & testing</li>
-        <li>OS & driver setup</li>
-      </ul>
-      <div class="service-cta"><a href="mailto:desmondisaac247@gmail.com" class="service-btn">Get a quote →</a></div>
-    </div>
-    <div class="service-card">
-      <span class="service-icon">🎮</span>
-      <div class="service-title">Gaming Setup Design</div>
-      <p class="service-desc">Full desk and gaming setup builds — cable management, peripherals, lighting, and everything that makes a setup look and feel great.</p>
-      <ul class="service-features">
-        <li>Setup layout planning</li>
-        <li>Peripheral recommendations</li>
-        <li>Cable management</li>
-        <li>Aesthetic customisation</li>
-      </ul>
-      <div class="service-cta"><a href="mailto:desmondisaac247@gmail.com" class="service-btn">Get a quote →</a></div>
-    </div>
-    <div class="service-card">
-      <span class="service-icon">🔧</span>
-      <div class="service-title">PC & Laptop Repairs</div>
-      <p class="service-desc">Hardware troubleshooting, component replacement, and general repairs for PCs and laptops — fast, reliable, and fairly priced.</p>
-      <ul class="service-features">
-        <li>Hardware diagnostics</li>
-        <li>Component replacement</li>
-        <li>Software & OS issues</li>
-        <li>Upgrade consultations</li>
-      </ul>
-      <div class="service-cta"><a href="mailto:desmondisaac247@gmail.com" class="service-btn">Get a quote →</a></div>
-    </div>
-  </div>
-</section>
+<div class="card">
+<span class="badge">AI AUTOMATION</span>
+<h3>AI Customer Support &amp; Sales Multi-Agent System</h3>
+<p>A multi-agent AI system that handles customer support questions and sales conversations, built as a working demo for businesses.</p>
+<div class="tags"><span>LLMs</span><span>Claude API</span><span>Multi-agent</span></div>
+</div>
 
-<section id="learning">
-  <div class="divider"></div>
-  <div class="section-label">04 — currently</div>
-  <h2>What I'm working on</h2>
-  <div class="learning-grid">
-    <div class="learning-card">
-      <div class="learning-icon">⚡</div>
-      <div>
-        <div class="learning-title">Building in public</div>
-        <div class="learning-sub">Shipping projects, learning by doing, growing my portfolio one build at a time.</div>
-      </div>
-    </div>
-    <div class="learning-card">
-      <div class="learning-icon">🤖</div>
-      <div>
-        <div class="learning-title">AI & Automation</div>
-        <div class="learning-sub">Exploring how AI agents and workflow automation can solve real everyday problems.</div>
-      </div>
-    </div>
-    <div class="learning-card">
-      <div class="learning-icon">🌐</div>
-      <div>
-        <div class="learning-title">Full-stack dev</div>
-        <div class="learning-sub">Going deeper into React, Node.js, and backend development to become a complete engineer.</div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="card">
+<span class="badge">AI AUTOMATION</span>
+<h3>Lead Notification Automation</h3>
+<p>An n8n workflow that watches a Google Sheet for new leads and sends an instant Telegram alert, so no lead goes unnoticed.</p>
+<div class="tags"><span>n8n</span><span>Google Sheets</span><span>Telegram</span></div>
+</div>
 
-<section id="contact">
-  <div class="divider"></div>
-  <div class="section-label">05 — contact</div>
-  <div class="contact-box">
-    <div class="contact-title">Let's build something<br><span class="name-highlight">together.</span></div>
-    <p class="contact-sub">
-      Need a website, an automation tool, or a custom PC build?<br>
-      Isaac is open to freelance work and entry-level opportunities.
-    </p>
-    <a href="mailto:desmondisaac247@gmail.com" class="btn btn-primary">say hello ↗</a>
-    <div class="social-links">
-      <a href="https://github.com/CodexWayde" target="_blank" class="social-link"><span class="social-dot"></span>GitHub</a>
-      <a href="mailto:desmondisaac247@gmail.com" class="social-link"><span class="social-dot"></span>Email</a>
-    </div>
-  </div>
-</section>
+<div class="card">
+<span class="badge">PYTHON</span>
+<h3>The Global Nexus: AI News Bot</h3>
+<p>A Telegram bot that gathers news from multiple sources and posts four times a day. It runs 24/7 and serves 1,000+ users.</p>
+<div class="tags"><span>Python</span><span>Telegram Bot API</span><span>NewsAPI</span><span>Railway</span></div>
+</div>
 
-<footer>
-  designed &amp; built by Isaac Desmond &nbsp;·&nbsp; 2025 &nbsp;·&nbsp; all rights reserved
-</footer>
+<div class="card">
+<span class="badge">MOBILE APP</span>
+<h3>TradeSync: Artisan Marketplace</h3>
+<p>A mobile app connecting artisans with customers in Nigeria, with a job board, image uploads, search, and saved artisans. Currently in final testing.</p>
+<div class="tags"><span>React Native</span><span>Expo</span><span>Supabase</span></div>
+</div>
+
+<div class="card">
+<span class="badge">WEBSITE</span>
+<h3>CodexWeb Services</h3>
+<p>A live business website with pricing tables, Paystack payments, WhatsApp integration, and full SEO setup.</p>
+<div class="tags"><span>React</span><span>Vercel</span><span>Paystack</span><span>SEO</span></div>
+<a href="https://codexwebservices.vercel.app">Visit live site &rarr;</a>
+</div>
+
+</div>
+</div></section>
+
+<section id="skills"><div class="wrap">
+<h2>Skills</h2>
+<div class="skills">
+<div><h3>AI &amp; Automation</h3><p>n8n, LLMs, Claude API, Telegram Bot API, scheduled workflows, API integrations</p></div>
+<div><h3>Backend</h3><p>Python, Flask, Node.js, Supabase, PostgreSQL, REST APIs</p></div>
+<div><h3>Frontend &amp; Mobile</h3><p>React, React Native, Expo, JavaScript, HTML, CSS</p></div>
+<div><h3>Deployment</h3><p>Vercel, Railway, Git &amp; GitHub</p></div>
+</div>
+</div></section>
+
+<section id="contact" class="contact"><div class="wrap">
+<h2>Let's work together</h2>
+<p>Have a repetitive process you want automated? Send me one small task and I'll show you what I can do.</p>
+<div class="btns">
+<a class="btn primary" href="mailto:desmondisaac247@gmail.com">Email me</a>
+<a class="btn" href="https://wa.me/2347072755225">WhatsApp</a>
+<a class="btn" href="https://www.linkedin.com/in/isaac-desmond-b23a213a7">LinkedIn</a>
+</div>
+<p style="margin-top:20px">+234 707 275 5225</p>
+</div></section>
+
+<footer><div class="wrap">&copy; 2026 Isaac Desmond</div></footer>
+
 </body>
 </html>
