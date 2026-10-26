@@ -6,133 +6,258 @@
 <title>Isaac Desmond | AI Automation & Full-Stack Developer</title>
 <meta name="description" content="Self-taught AI automation and full-stack developer building n8n workflows, Python bots, and mobile apps. Available for remote work worldwide.">
 <style>
-:root{--bg:#0d1117;--card:#161b22;--text:#e6edf3;--muted:#8b949e;--accent:#58a6ff;--border:#30363d}
-@media (prefers-color-scheme:light){:root{--bg:#f6f8fa;--card:#fff;--text:#1f2328;--muted:#59636e;--accent:#0969da;--border:#d1d9e0}}
+:root{
+  --bg:#07090f;--bg2:#0d1119;--card:#0f141d;--text:#eef2f8;--muted:#93a0b4;
+  --accent:#6ea8ff;--accent2:#a78bfa;--border:rgba(255,255,255,.09);--glass:rgba(7,9,15,.7)
+}
+@media (prefers-color-scheme:light){
+  :root{--bg:#f7f8fb;--bg2:#eef1f6;--card:#fff;--text:#111827;--muted:#5b6678;
+  --accent:#2563eb;--accent2:#7c3aed;--border:rgba(15,23,42,.1);--glass:rgba(247,248,251,.75)}
+}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
-a{color:var(--accent);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:960px;margin:0 auto;padding:0 20px}
-nav{border-bottom:1px solid var(--border);padding:16px 0}
-nav .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-nav strong{font-size:1.1rem}
-nav div a{margin-left:18px;color:var(--muted);font-size:.95rem}
-.hero{padding:72px 0 48px}
-.hero h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.15;margin-bottom:16px}
-.hero h1 span{color:var(--accent)}
-.hero p{color:var(--muted);font-size:1.1rem;max-width:620px;margin-bottom:28px}
-.btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn{padding:11px 22px;border-radius:8px;font-weight:600;border:1px solid var(--accent)}
-.btn.primary{background:var(--accent);color:#fff}
-.btn.primary:hover{text-decoration:none;opacity:.9}
-.stats{display:flex;gap:32px;flex-wrap:wrap;margin-top:40px}
-.stats b{display:block;font-size:1.6rem}
-.stats small{color:var(--muted)}
-section{padding:48px 0}
-h2{font-size:1.6rem;margin-bottom:24px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px}
-.card h3{margin-bottom:8px;font-size:1.1rem}
-.card p{color:var(--muted);font-size:.95rem;margin-bottom:14px}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-.tags span{font-size:.78rem;padding:3px 10px;border-radius:99px;border:1px solid var(--border);color:var(--muted)}
-.badge{display:inline-block;font-size:.75rem;color:var(--accent);margin-bottom:8px}
-.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.skills h3{font-size:1rem;margin-bottom:6px}
-.skills p{color:var(--muted);font-size:.93rem}
-.contact{text-align:center}
-.contact p{color:var(--muted);max-width:520px;margin:0 auto 24px}
-.contact .btns{justify-content:center}
-footer{border-top:1px solid var(--border);padding:24px 0;text-align:center;color:var(--muted);font-size:.85rem}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:700;letter-spacing:-.02em}
+.logo span{color:var(--accent)}
+.links{display:flex;gap:28px;align-items:center}
+.links a{color:var(--muted);font-size:.93rem;transition:color .2s}
+.links a:hover{color:var(--text)}
+.links .cta{color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:8px 18px;border-radius:99px;font-weight:600}
+.burger{display:none;background:none;border:1px solid var(--border);color:var(--text);width:40px;height:40px;border-radius:10px;font-size:1.2rem;cursor:pointer}
+@media(max-width:720px){
+  .burger{display:block}
+  .links{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;gap:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 22px 16px}
+  .links.open{display:flex}
+  .links a{padding:12px 0;width:100%}
+  .links .cta{text-align:center;margin-top:8px}
+}
+
+/* HERO */
+.hero{position:relative;padding:96px 0 72px;text-align:center;overflow:hidden}
+.glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;z-index:-1;animation:float 12s ease-in-out infinite}
+.glow.a{width:420px;height:420px;background:var(--accent);top:-120px;left:8%}
+.glow.b{width:380px;height:380px;background:var(--accent2);top:20px;right:6%;animation-delay:-6s}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,24px)}}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border);background:var(--card);padding:6px 14px;border-radius:99px;font-size:.85rem;color:var(--muted);margin-bottom:26px}
+.dot{width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+.hero h1{font-size:clamp(2.3rem,7vw,4.2rem);line-height:1.08;letter-spacing:-.035em;max-width:820px;margin:0 auto 20px}
+.grad{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:1.12rem;max-width:600px;margin:0 auto 32px}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{padding:13px 26px;border-radius:12px;font-weight:600;border:1px solid var(--border);background:var(--card);transition:transform .2s,border-color .2s}
+.btn:hover{transform:translateY(-2px);border-color:var(--accent)}
+.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:700px;margin:56px auto 0}
+.stat{border:1px solid var(--border);background:var(--card);border-radius:16px;padding:18px 10px}
+.stat b{display:block;font-size:1.7rem;letter-spacing:-.02em}
+.stat small{color:var(--muted);font-size:.82rem}
+
+/* MARQUEE */
+.marquee{border-block:1px solid var(--border);background:var(--bg2);overflow:hidden;padding:18px 0}
+.track{display:flex;gap:48px;width:max-content;animation:scroll 30s linear infinite}
+.track span{color:var(--muted);font-weight:600;white-space:nowrap;font-size:.95rem}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:84px 0}
+.eyebrow{color:var(--accent);font-size:.82rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+h2{font-size:clamp(1.7rem,4vw,2.5rem);letter-spacing:-.03em;line-height:1.15;margin-bottom:12px}
+.sub{color:var(--muted);max-width:560px;margin-bottom:40px}
+
+/* BENTO PROJECTS */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.card{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:rgba(110,168,255,.5)}
+.card::before{content:"";position:absolute;inset:0;background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),rgba(110,168,255,.14),transparent 60%);opacity:0;transition:opacity .25s;pointer-events:none}
+.card:hover::before{opacity:1}
+.card > *{position:relative}
+.s4{grid-column:span 4}.s3{grid-column:span 3}.s2{grid-column:span 2}
+@media(max-width:860px){.s4,.s3,.s2{grid-column:span 6}}
+.badge{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--accent);background:rgba(110,168,255,.1);padding:4px 10px;border-radius:99px;margin-bottom:14px}
+.card h3{font-size:1.25rem;letter-spacing:-.02em;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.96rem;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:.76rem;padding:4px 10px;border-radius:99px;border:1px solid var(--border);color:var(--muted)}
+.link{display:inline-block;margin-top:16px;color:var(--accent);font-weight:600;font-size:.92rem}
+
+/* PROCESS */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.step{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px}
+.num{font-size:2.2rem;font-weight:800;letter-spacing:-.04em;margin-bottom:6px}
+.step h3{font-size:1.1rem;margin-bottom:6px}
+.step p{color:var(--muted);font-size:.94rem}
+
+/* SKILLS */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.skill{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px}
+.skill h3{font-size:1rem;margin-bottom:8px}
+.skill p{color:var(--muted);font-size:.92rem}
+
+/* CONTACT */
+.contact-card{position:relative;overflow:hidden;text-align:center;border:1px solid var(--border);background:var(--card);border-radius:28px;padding:64px 24px}
+.contact-card .glow{opacity:.25}
+.contact-card p{color:var(--muted);max-width:520px;margin:0 auto 28px}
+.phone{margin-top:22px;color:var(--muted);font-size:.95rem}
+footer{border-top:1px solid var(--border);padding:28px 0;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.show{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
 </style>
 </head>
 <body>
 
 <nav><div class="wrap">
-<strong>Isaac Desmond</strong>
-<div><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#contact">Contact</a></div>
+  <a class="logo" href="#top">isaac<span>.</span>desmond</a>
+  <button class="burger" id="burger" aria-label="Menu">&#9776;</button>
+  <div class="links" id="links">
+    <a href="#projects">Projects</a>
+    <a href="#process">How I work</a>
+    <a href="#skills">Skills</a>
+    <a class="cta" href="#contact">Hire me</a>
+  </div>
 </div></nav>
 
-<header class="hero"><div class="wrap">
-<h1>I build <span>AI automation</span> and full-stack apps that save businesses time.</h1>
-<p>Self-taught developer based in Nigeria, available for remote work worldwide. I turn manual, repetitive work into workflows that run on their own, using n8n, Python, and modern JavaScript.</p>
-<div class="btns">
-<a class="btn primary" href="#contact">Hire me</a>
-<a class="btn" href="https://github.com/CodexWayde">View GitHub</a>
+<header class="hero" id="top">
+  <div class="glow a"></div><div class="glow b"></div>
+  <div class="wrap">
+    <div class="pill"><span class="dot"></span>Available for remote work worldwide</div>
+    <h1>I build <span class="grad">AI automation</span> and apps that save your team hours.</h1>
+    <p>Self-taught developer in Nigeria. I turn repetitive manual work into workflows that run on their own, using n8n, Python, and modern JavaScript.</p>
+    <div class="btns">
+      <a class="btn primary" href="#contact">Give me a trial task</a>
+      <a class="btn" href="https://github.com/CodexWayde">View GitHub</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>50+</b><small>projects delivered</small></div>
+      <div class="stat"><b>1,000+</b><small>users on my AI bot</small></div>
+      <div class="stat"><b>3-5 days</b><small>typical turnaround</small></div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>n8n</span><span>Python</span><span>JavaScript</span><span>React</span><span>React Native</span><span>Supabase</span><span>Claude API</span><span>Telegram Bot API</span><span>Flask</span><span>PostgreSQL</span><span>Vercel</span><span>Railway</span>
+    <span>n8n</span><span>Python</span><span>JavaScript</span><span>React</span><span>React Native</span><span>Supabase</span><span>Claude API</span><span>Telegram Bot API</span><span>Flask</span><span>PostgreSQL</span><span>Vercel</span><span>Railway</span>
+  </div>
 </div>
-<div class="stats">
-<div><b>50+</b><small>projects delivered</small></div>
-<div><b>1,000+</b><small>users on my AI news bot</small></div>
-<div><b>3-5 days</b><small>typical website turnaround</small></div>
-</div>
-</div></header>
 
 <section id="projects"><div class="wrap">
-<h2>Featured projects</h2>
-<div class="grid">
+  <div class="eyebrow reveal">Selected work</div>
+  <h2 class="reveal">Things I’ve built and shipped</h2>
+  <p class="sub reveal">Real projects, running in production or ready for it.</p>
 
-<div class="card">
-<span class="badge">AI AUTOMATION</span>
-<h3>AI Customer Support &amp; Sales Multi-Agent System</h3>
-<p>A multi-agent AI system that handles customer support questions and sales conversations, built as a working demo for businesses.</p>
-<div class="tags"><span>LLMs</span><span>Claude API</span><span>Multi-agent</span></div>
-</div>
+  <div class="bento">
+    <div class="card s4 reveal">
+      <span class="badge">AI AUTOMATION</span>
+      <h3>AI Customer Support &amp; Sales Multi-Agent System</h3>
+      <p>A multi-agent AI system that answers customer questions and handles sales conversations, built as a working demo businesses can try.</p>
+      <div class="tags"><span>LLMs</span><span>Claude API</span><span>Multi-agent</span></div>
+    </div>
 
-<div class="card">
-<span class="badge">AI AUTOMATION</span>
-<h3>Lead Notification Automation</h3>
-<p>An n8n workflow that watches a Google Sheet for new leads and sends an instant Telegram alert, so no lead goes unnoticed.</p>
-<div class="tags"><span>n8n</span><span>Google Sheets</span><span>Telegram</span></div>
-</div>
+    <div class="card s2 reveal">
+      <span class="badge">AI AUTOMATION</span>
+      <h3>Lead Notification Automation</h3>
+      <p>New lead in Google Sheets? An instant Telegram alert goes out.</p>
+      <div class="tags"><span>n8n</span><span>Sheets</span><span>Telegram</span></div>
+    </div>
 
-<div class="card">
-<span class="badge">PYTHON</span>
-<h3>The Global Nexus: AI News Bot</h3>
-<p>A Telegram bot that gathers news from multiple sources and posts four times a day. It runs 24/7 and serves 1,000+ users.</p>
-<div class="tags"><span>Python</span><span>Telegram Bot API</span><span>NewsAPI</span><span>Railway</span></div>
-</div>
+    <div class="card s2 reveal">
+      <span class="badge">PYTHON</span>
+      <h3>The Global Nexus</h3>
+      <p>An AI news bot posting 4 times a day to 1,000+ users, running 24/7.</p>
+      <div class="tags"><span>Python</span><span>NewsAPI</span><span>Railway</span></div>
+    </div>
 
-<div class="card">
-<span class="badge">MOBILE APP</span>
-<h3>TradeSync: Artisan Marketplace</h3>
-<p>A mobile app connecting artisans with customers in Nigeria, with a job board, image uploads, search, and saved artisans. Currently in final testing.</p>
-<div class="tags"><span>React Native</span><span>Expo</span><span>Supabase</span></div>
-</div>
+    <div class="card s4 reveal">
+      <span class="badge">MOBILE APP</span>
+      <h3>TradeSync: Artisan Marketplace</h3>
+      <p>A mobile app connecting artisans with customers in Nigeria. It has a job board, image uploads, search with category filters, and saved artisans. Currently in final testing.</p>
+      <div class="tags"><span>React Native</span><span>Expo</span><span>Supabase</span></div>
+    </div>
 
-<div class="card">
-<span class="badge">WEBSITE</span>
-<h3>CodexWeb Services</h3>
-<p>A live business website with pricing tables, Paystack payments, WhatsApp integration, and full SEO setup.</p>
-<div class="tags"><span>React</span><span>Vercel</span><span>Paystack</span><span>SEO</span></div>
-<a href="https://codexwebservices.vercel.app">Visit live site &rarr;</a>
-</div>
+    <div class="card s6 reveal" style="grid-column:span 6">
+      <span class="badge">WEBSITE</span>
+      <h3>CodexWeb Services</h3>
+      <p>A live business site with pricing tables, Paystack payments, WhatsApp integration, and a full SEO setup including Google Search Console.</p>
+      <div class="tags"><span>React</span><span>Vercel</span><span>Paystack</span><span>SEO</span></div>
+      <a class="link" href="https://codexwebservices.vercel.app">Visit live site &rarr;</a>
+    </div>
+  </div>
+</div></section>
 
-</div>
+<section id="process" style="background:var(--bg2)"><div class="wrap">
+  <div class="eyebrow reveal">How I work</div>
+  <h2 class="reveal">Low risk for you, fast results</h2>
+  <p class="sub reveal">No long contracts to start. You see the work before you commit.</p>
+  <div class="steps">
+    <div class="step reveal"><div class="num grad">01</div><h3>15-minute call</h3><p>You tell me what’s slowing your team down. I tell you honestly if I can fix it.</p></div>
+    <div class="step reveal"><div class="num grad">02</div><h3>Small trial task</h3><p>I take one real task and deliver it, so you can judge the quality first.</p></div>
+    <div class="step reveal"><div class="num grad">03</div><h3>Ship and iterate</h3><p>Clear updates, working builds, and fast turnaround from there.</p></div>
+  </div>
 </div></section>
 
 <section id="skills"><div class="wrap">
-<h2>Skills</h2>
-<div class="skills">
-<div><h3>AI &amp; Automation</h3><p>n8n, LLMs, Claude API, Telegram Bot API, scheduled workflows, API integrations</p></div>
-<div><h3>Backend</h3><p>Python, Flask, Node.js, Supabase, PostgreSQL, REST APIs</p></div>
-<div><h3>Frontend &amp; Mobile</h3><p>React, React Native, Expo, JavaScript, HTML, CSS</p></div>
-<div><h3>Deployment</h3><p>Vercel, Railway, Git &amp; GitHub</p></div>
-</div>
+  <div class="eyebrow reveal">Toolbox</div>
+  <h2 class="reveal">What I work with</h2>
+  <p class="sub reveal"></p>
+  <div class="skills">
+    <div class="skill reveal"><h3>AI &amp; Automation</h3><p>n8n, LLMs, Claude API, Telegram Bot API, scheduled workflows, API integrations</p></div>
+    <div class="skill reveal"><h3>Backend</h3><p>Python, Flask, Node.js, Supabase, PostgreSQL, REST APIs</p></div>
+    <div class="skill reveal"><h3>Frontend &amp; Mobile</h3><p>React, React Native, Expo, JavaScript, HTML, CSS</p></div>
+    <div class="skill reveal"><h3>Deployment</h3><p>Vercel, Railway, Git &amp; GitHub</p></div>
+  </div>
 </div></section>
 
-<section id="contact" class="contact"><div class="wrap">
-<h2>Let's work together</h2>
-<p>Have a repetitive process you want automated? Send me one small task and I'll show you what I can do.</p>
-<div class="btns">
-<a class="btn primary" href="mailto:desmondisaac247@gmail.com">Email me</a>
-<a class="btn" href="https://wa.me/2347072755225">WhatsApp</a>
-<a class="btn" href="https://www.linkedin.com/in/isaac-desmond-b23a213a7">LinkedIn</a>
-</div>
-<p style="margin-top:20px">+234 707 275 5225</p>
+<section id="contact"><div class="wrap">
+  <div class="contact-card reveal">
+    <div class="glow a"></div>
+    <div class="eyebrow">Let’s talk</div>
+    <h2>Got something to automate?</h2>
+    <p>Send me one small task. I’ll show you what I can do before you commit to anything.</p>
+    <div class="btns">
+      <a class="btn primary" href="mailto:desmondisaac247@gmail.com">Email me</a>
+      <a class="btn" href="https://wa.me/2347072755225">WhatsApp</a>
+      <a class="btn" href="https://www.linkedin.com/in/isaac-desmond-b23a213a7">LinkedIn</a>
+    </div>
+    <div class="phone">+234 707 275 5225</div>
+  </div>
 </div></section>
 
-<footer><div class="wrap">&copy; 2026 Isaac Desmond</div></footer>
+<footer><div class="wrap">&copy; 2026 Isaac Desmond &middot; Abuja, Nigeria</div></footer>
 
+<script>
+// mobile menu
+var burger=document.getElementById('burger'),links=document.getElementById('links');
+burger.addEventListener('click',function(){links.classList.toggle('open')});
+links.addEventListener('click',function(e){if(e.target.tagName==='A')links.classList.remove('open')});
+
+// scroll reveal
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('show');io.unobserve(en.target)}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+
+// card spotlight
+document.querySelectorAll('.card').forEach(function(card){
+  card.addEventListener('mousemove',function(e){
+    var r=card.getBoundingClientRect();
+    card.style.setProperty('--mx',(e.clientX-r.left)+'px');
+    card.style.setProperty('--my',(e.clientY-r.top)+'px');
+  });
+});
+</script>
 </body>
 </html>
